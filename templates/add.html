@@ -1,0 +1,56 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block title %}Add A New Cafe{% endblock %}
+{% block styles %}
+{{super()}}
+<style>
+  body{
+    background-color: #333;
+    color: white;
+  }
+  #form_submit_button{
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+  }
+  #form_submit_button:hover{
+    background-color: #eea236;
+    border-color: #eea236;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8">
+
+      <h1>Add a new cafe into the database</h1>
+
+      <!-- This is where your WTForm will go -->
+      {{wtf.quick_form(form,novalidate=true)}}
+
+      {% for message in get_flashed_messages() %}
+      <br>
+        <div class="alert alert-success" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+
+      <script>
+        function showAlert() {
+          alert("Cafe added successfully!");
+        }
+      </script>
+
+      {% if success_message %}
+        <script>
+          showAlert();
+        </script>
+      {% endif %}
+
+    <p class="space-above"><a href="{{url_for('cafes')}}">See all cafes</a></p>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
